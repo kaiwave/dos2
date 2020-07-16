@@ -1,3 +1,5 @@
+#gonna put it all in a single file for faster response
+
 dbfper = 0
 unlock = 0
 pswdatmtnum = 0
@@ -28,9 +30,9 @@ print("/     |    |") ; sleep(0.2)
 print("\     |    |") ; sleep(0.2)
 print(" --   |    -") ; sleep(0.2)
 print("") ; sleep(0.2)
-print("© Carrot Tech Industries") ; sleep(0.2)
-print("A sub division of Yetroll®") ; sleep(0.2)
-print("Loading cOS 1.2.1...") ; sleep(2)
+print("Â© Carrot Tech Industries") ; sleep(0.2)
+print("A sub division of YetrollÂ®") ; sleep(0.2)
+print("Loading cOS 1.3.1...") ; sleep(2)
 print("---------------------")
 print("User:", username)
 while unlock == 0:

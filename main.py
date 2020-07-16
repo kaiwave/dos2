@@ -1,5 +1,10 @@
 #gonna put it all in a single file for faster response
 
+import os
+import sys
+import random
+from time import sleep
+
 dbfper = 0
 unlock = 0
 pswdatmtnum = 0
@@ -7,23 +12,24 @@ passfile1 = open("passfile.ytr","r")
 passfile = passfile1.read()
 username1 = open("username.ytr","r")
 username = username1.read()
-import os
-from time import sleep
+
 while dbfper <= 100:
-    print("Loading Database Files:", dbfper, "%")
-    lineloadout = 0
-    while lineloadout <= 2:
-        print("") ; sleep(0.125)
-        lineloadout = lineloadout + 1
-    dbfper = dbfper + 6.25
+	print("Loading Database Files: {dbfper}%".format(dbfper=dbfper))
+	sys.stdout.write("\033[F") # Cursor up one line
+	dbfper = dbfper + 6.25
+	sleep(random.uniform(0.1, 0.2))
+
 intper = 0
+
+print("")
+
 while intper <= 100:
-    print("Loading Initialisation Data", intper, "%")
-    lineloadout = 0
-    while lineloadout <= 2:
-        print("") ; sleep(0.05)
-        lineloadout = lineloadout + 1
-    intper = intper + 6.25
+	print("Loading Initialisation Data: {intper}%".format(intper=intper))
+	sys.stdout.write("\033[F") # Cursor up one line
+	intper = intper + 6.25
+	sleep(random.uniform(0.1, 0.2))
+
+
 print("")
 print(" __  ____  _") ; sleep(0.2)
 print("/     |    |") ; sleep(0.2)

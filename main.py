@@ -3,28 +3,42 @@
 import os
 import sys
 import random
+import time
+import getpass
 from time import sleep
 
+from colorama import init
+from colorama import Fore, Back, Style
+init()
+
+class colours:
+	error = Style.BRIGHT + Fore.RED + "[!] " + Fore.WHITE
+	warning = Style.BRIGHT + Fore.YELLOW + "[!] " + Fore.WHITE
+	prompt = Style.BRIGHT + Fore.CYAN + "[enter command] " + Style.RESET_ALL
+	action = Style.BRIGHT + Fore.YELLOW + "--> " + Fore.WHITE
+	question = Style.BRIGHT + Fore.YELLOW + "[?] " + Fore.WHITE
+	loading = Style.BRIGHT + Fore.BLUE + ":: " + Fore.WHITE
+
+
 dbfper = 0
-unlock = 0
-pswdatmtnum = 0
-passfile1 = open("passfile.ytr","r")
+intper = 0
+unlock = 1
+incorrectAttempts = 0
+passfile1 = open("passfile.ytr", "r")
 passfile = passfile1.read()
-username1 = open("username.ytr","r")
+username1 = open("username.ytr", "r")
 username = username1.read()
 
 while dbfper <= 100:
-	print("Loading Database Files: {dbfper}%".format(dbfper=dbfper))
+	print(colours.loading + "Loading Database Files: {dbfper}%".format(dbfper=dbfper))
 	sys.stdout.write("\033[F") # Cursor up one line
 	dbfper = dbfper + 6.25
 	sleep(random.uniform(0.1, 0.2))
 
-intper = 0
-
 print("")
 
 while intper <= 100:
-	print("Loading Initialisation Data: {intper}%".format(intper=intper))
+	print(colours.loading + "Loading Initialisation Data: {intper}%".format(intper=intper))
 	sys.stdout.write("\033[F") # Cursor up one line
 	intper = intper + 6.25
 	sleep(random.uniform(0.1, 0.2))
@@ -35,11 +49,13 @@ print("/     |    |") ; sleep(0.2)
 print("\     |    |") ; sleep(0.2)
 print(" --   |    -") ; sleep(0.2)
 print("") ; sleep(0.2)
+print(Style.RESET_ALL)
 print("© Carrot Tech Industries") ; sleep(0.2)
-print("A sub division of Yetroll®") ; sleep(0.2)
-print("Loading cOS 1.3.1...") ; sleep(2)
-print("---------------------")
+print("A sub division of Yetroll®\n") ; sleep(0.2)
+print(colours.loading + "Loading cOS 1.3.1...") ; sleep(2)
+
 print("User:", username)
+print("")
 
 
 def calculator():
@@ -95,12 +111,16 @@ def calculator():
 def main():
 	sysRun = True
 	while sysRun is True:
-		commandInput = input("main.py     ")
+		commandInput = input(colours.prompt)
 		if commandInput == "/help":
-			print("Use /sysinfo to bring up information about the system!")
+			print("Use /sysinfo to bring up information about the system!\n")
 
 		elif commandInput == "/calculator":
 			calculator()
+
+		elif commandInput == "/exit":
+			sysRun = False
+			exit()
 
 
 while unlock == 0:
@@ -109,15 +129,21 @@ while unlock == 0:
 		unlock = 1
 		main()
 
-	elif swdatmtnum <= 5:
-		pswdatmt = input("Enter Password")
-		if pswdatmt == passfile:
+	elif incorrectAttempts <= 5:
+		passInput = getpass.getpass(colours.question + "Enter Password: ")
+		if passInput == passfile:
 			unlock = 1
 			main()
-
 		else:
 			unlock = 0
-			pswdatmtnum = pswdatmtnum + 1
-			print(pswdatmtnum, "Attempts")
+			incorrectAttempts = incorrectAttempts + 1
+			print(colours.error + "Incorrect password!\n")
 	else:
+		print("")
+		print(colours.error + "Incorrect password inputed too many times!")
+		time.sleep(0.5)
+		print(colours.action + "Exiting...\n")
+		time.sleep(1)
 		exit()
+
+main()

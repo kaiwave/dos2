@@ -22,7 +22,7 @@ class colours:
 
 dbfper = 0
 intper = 0
-unlock = 1
+unlock = 0
 incorrectAttempts = 0
 passfile1 = open("passfile.ytr", "r")
 passfile = passfile1.read()

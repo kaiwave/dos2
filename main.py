@@ -145,5 +145,3 @@ while unlock == 0:
 		print(colours.action + "Exiting...\n")
 		time.sleep(1)
 		exit()
-
-main()
